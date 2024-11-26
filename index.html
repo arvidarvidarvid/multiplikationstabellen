@@ -245,12 +245,12 @@
             let width = 100;
             progressBar.style.width = width + '%';
             progressBar.setAttribute('aria-valuenow', width);
-            const decrement = 100 / answerTime;
+            const decrement = 10 / answerTime;
             countdownInterval = setInterval(() => {
                 width -= decrement;
                 progressBar.style.width = width + '%';
                 progressBar.setAttribute('aria-valuenow', width);
-                if (width <= 0) {
+                if (progressBar.getBoundingClientRect()['width'] <= 0) {
                     clearInterval(countdownInterval);
                     const unknownList = document.getElementById('unknown-list');
                     const listItem = document.createElement('li');
@@ -261,7 +261,7 @@
                     showAnswerAndGenerateNew(num1, num2, num1 * num2, false);
                     removeFromAllList(num1, num2);
                 }
-            }, 1000);
+            }, 100);
         }
 
         function restart() {
